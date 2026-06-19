@@ -1,0 +1,46 @@
+# pi sandbox auto generated files
+.claude/*
+.bash_profile
+.bashrc
+.zprofile
+.zshrc
+.vscode
+.ripgreprc
+.profile
+.mcp.json
+.idea
+id_ed25519
+id_rsa
+.gitmodules
+.gitconfig
+
+# secrets
+.env
+.env.local
+.env.production
+
+# build
+dist/
+
+# assets
+*/assets/
+*.glb
+*.gltf
+*.obj
+*.mtl
+*.gif
+*.jpg
+*.jpeg
+*.png
+*.tiff
+*.bmp
+*.exr
+*.mp4
+*.mov
+*.mp3
+*.aiff
+*.wav
+*.flac
+
+# logs
+logs/
