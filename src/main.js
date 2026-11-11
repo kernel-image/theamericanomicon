@@ -1,29 +1,30 @@
 import './style.css'
 import * as THREE from 'three';
 import { WebGPURenderer } from 'three/webgpu';
-import { getScene, getCamera } from './sceneLoader';
+import { getScene, getCamera, initScene } from './sceneLoader';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { getCurrentScene } from './state';
+import { fadeIn, initFade } from './utils/fadeInOut';
+import { stateMan } from './state';
+import { raycastMan } from './raycaster';
 
-const scene = getScene(getCurrentScene());
-const camera = getCamera(getCurrentScene());
 const renderer = new WebGPURenderer({alpha: false});
 let camControls;
 
 async function init() {
-  
+  console.log(`scene: ${stateMan.nextScene()}`);
+  initScene();
   renderer.setPixelRatio( window.devicePixelRatio );
   renderer.setSize( window.innerWidth, window.innerHeight );
   document.body.appendChild( renderer.domElement );
+  initFade();
   await renderer.init();
   window.addEventListener( 'resize', onWindowResize );
-  camControls = new createCamControl( camera );
+  camControls = new createCamControl( getCamera() );
   camControls.target.set(0, 0, .01);
-
-
+  raycastMan();
 }
 
-function createCamControl(camera){
+function createCamControl(camera) {
 
 				const controls = new OrbitControls( camera, renderer.domElement );
         controls.enableRotate = true;
@@ -41,10 +42,7 @@ function createCamControl(camera){
 
 
 function onWindowResize() {
-
-  const windowHalfX = window.innerWidth / 2;
-  const windowHalfY = window.innerHeight / 2;
-
+  const camera = getCamera();
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
@@ -55,12 +53,12 @@ function onWindowResize() {
 
 function animate() {
   camControls.update();
-  renderer.render( scene, camera );
+  renderer.render( getScene(), getCamera() );
 
 }
 
 await init();
-//renderer.render( scene, camera );
 renderer.setAnimationLoop( animate );
+fadeIn();
 
 

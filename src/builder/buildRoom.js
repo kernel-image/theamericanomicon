@@ -51,10 +51,14 @@ function createBeam(height=3, thickness=0.3, axis='y'){
 
 
 function buildWallGeo(){
-    //build left wall
+    //make planes
     const wallLeft = createPlane(roomScale, wallRes, 'x');
     const wallRight = wallLeft.clone();
     const wallFront = createPlane(roomScale, wallRes);
+    //fix normals
+    wallRight.rotateY(Math.PI);
+    wallFront.rotateY(Math.PI);
+    //translate
     wallLeft.translate(roomScale/-2,0,0);
     wallRight.translate(roomScale/2,0,0);    
     wallFront.translate(0, 0, roomScale/2);
