@@ -1,0 +1,19 @@
+{
+  "name": "theamericanomicon",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "eslint": "^10.14.0",
+    "prettier": "^3.9.10",
+    "vite": "^8.3.6"
+  },
+  "dependencies": {
+    "three": "^0.187.0"
+  }
+}

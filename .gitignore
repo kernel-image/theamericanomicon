@@ -1,46 +1,29 @@
-# pi sandbox auto generated files
-.claude/*
-.bash_profile
-.bashrc
-.zprofile
-.zshrc
-.vscode
-.ripgreprc
-.profile
-.mcp.json
-.idea
-id_ed25519
-id_rsa
-.gitmodules
-.gitconfig
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# secrets
+# Packages and build artifacts
+node_modules
+dist
+dist-ssr
+*.local
+
+# Secrets
 .env
-.env.local
-.env.production
+.env.*
 
-# build
-dist/
-
-# assets
-*/assets/
-*.glb
-*.gltf
-*.obj
-*.mtl
-*.gif
-*.jpg
-*.jpeg
-*.png
-*.tiff
-*.bmp
-*.exr
-*.mp4
-*.mov
-*.mp3
-*.aiff
-*.wav
-*.flac
-
-# logs
-logs/
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
