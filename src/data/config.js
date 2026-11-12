@@ -2,14 +2,14 @@ const roomData = {
     "1":{
         "audio":"path",
         "materials":{
-            "walls":"wireframe",
-            "floor":"uv",
-            "ceiling":"uv",
-            "gate":"wireframe",
-            "portal1":"wireframe",
-            "portal2":"wireframe",
-            "abyss1":"uv",
-            "abyss2":"uv"
+            "walls":"metal",
+            "floor":"metal",
+            "ceiling":"metal",
+            "gate":"metal",
+            "portal1":"metal",
+            "portal2":"metal",
+            "abyss1":"metal",
+            "abyss2":"metal"
         },
         "camera":{
             "fov":135,
@@ -27,8 +27,8 @@ const roomData = {
         "audio":"path",
         "materials":{
             "walls":"uv",
-            "floor":"wireframe",
-            "ceiling":"wireframe",
+            "floor":"dirt",
+            "ceiling":"metal",
             "gate":"uv",
             "portal1":"uv",
             "portal2":"uv",
@@ -40,8 +40,8 @@ const roomData = {
         "audio":"path",
         "materials":{
             "walls":"wireframe",
-            "floor":"wireframe",
-            "ceiling":"wireframe",
+            "floor":"dirt",
+            "ceiling":"metal",
             "gate":"wireframe",
             "portal1":"wireframe",
             "portal2":"wireframe",

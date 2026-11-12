@@ -1,6 +1,7 @@
 import { stateMan } from "./state";
 import { initScene } from "./sceneLoader";
 import { fadeIn, fadeOut } from "./utils/fadeInOut";
+import { resetPosition, animateCam2Portal } from "./animator";
 
 let selectedPortal = null;
 const portalIds = ['abyss1', 'abyss2'];
@@ -10,10 +11,12 @@ function attemptNav() {
         switch (selectedPortal) {
             case portalIds[0]:
                 stateMan.prevScene();
+                animateCam2Portal(selectedPortal);
                 swapScenes();
                 break;
             case portalIds[1]:
                 stateMan.nextScene();
+                animateCam2Portal(selectedPortal);
                 swapScenes();
                 break;
         }
@@ -25,7 +28,8 @@ function swapScenes() {
     setTimeout(() => { 
         initScene();
         fadeIn();
-    }, 1000);
+        resetPosition();
+    }, 1200);
 }
 
 function setSelectedPortal(value){

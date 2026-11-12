@@ -22,7 +22,9 @@ function sceneLoader(sceneData){
     if (sceneData.lights){
         //add configured lights
     }else{
-        // scene.add(new THREE.AmbientLight());
+        scene.add(new THREE.AmbientLight());
+        //scene.add(new THREE.RectAreaLight());
+        scene.add(new THREE.PointLight());
     }
     return scene;
 }

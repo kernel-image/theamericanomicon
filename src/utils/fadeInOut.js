@@ -14,13 +14,12 @@ function initFade() {
 }
 
 function fadeOut () {
-    console.log("fadeOut");
     overlay.style.pointerEvents = 'auto';
     overlay.style.opacity = 1;
 }
 
 function fadeIn () {
-     overlay.style.pointerEvents = 'none';
+    overlay.style.pointerEvents = 'none';
     overlay.style.opacity = 0;
 }
 

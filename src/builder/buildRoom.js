@@ -4,7 +4,7 @@ import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js'
 
 const wallRes = 64;
 const roomScale = 2;
-const portalHeight = 1;
+const portalHeight = 1.5;
 const portalThickness = 0.1;
 
 
