@@ -1,14 +1,19 @@
 import * as THREE from 'three';
-import { getSceneData } from './data/config'
-import { room } from './builder/room'
+import { getCameraData, getSceneData } from './data/config'
+import { roomBuilder } from './builder/room'
+import { stateMan } from './state';
 
-
+let activeCam;
+let activeScene;
+let activePortals;
 
 function sceneLoader(sceneData){
     if (!sceneData){
-        throw Error("Invalid scene data");
+        //throw Error("Invalid scene data");
+        console.log("invalid scene data, skipping overrrides");
     }
     const scene = new THREE.Scene();
+    const room = roomBuilder();
     for (var i in room)
         scene.add(room[i]);
     if (sceneData.geo){
@@ -17,27 +22,29 @@ function sceneLoader(sceneData){
     if (sceneData.lights){
         //add configured lights
     }else{
-        // scene.add(new THREE.AmbientLight());
+        scene.add(new THREE.AmbientLight());
+        //scene.add(new THREE.RectAreaLight());
+        scene.add(new THREE.PointLight());
     }
     return scene;
 }
 
-function cameraLoader(sceneData){
-    if (!sceneData){
-        throw Error("Invalid scene data");
+function cameraLoader(cameraData){
+    if (!cameraData){
+        throw Error("Invalid camera data");
     }
     //construct camera from scene data
     const camera = new THREE.PerspectiveCamera(
-        sceneData.camera?.fov,
-        sceneData.camera?.aspect,
-        sceneData.camera?.near || 0.001,
-        sceneData.camera?.far || 50
+        cameraData.fov,
+        cameraData.aspect,
+        cameraData.near || 0.001,
+        cameraData.far || 50
     )
-    if (sceneData.camera?.position){
+    if (cameraData?.position){
         const position = new THREE.Vector3(
-            sceneData.camera.position.x, 
-            sceneData.camera.position.y,
-            sceneData.camera.position.z
+            cameraData.position.x, 
+            cameraData.position.y,
+            cameraData.position.z
         );
         if (position != camera.position)
             camera.translateOnAxis(position.normalize(), position.length());
@@ -45,16 +52,52 @@ function cameraLoader(sceneData){
     return camera;
 }
 
-function getCamera(key){
-    const data = getSceneData(key);
+function _getCamera(key){
+    const data = key ? getSceneData(key)?.camera || getCameraData() : getCameraData();
     const cam = cameraLoader(data);
     return cam;
 }
 
-function getScene(key){
-    const data = getSceneData(key);
+function _getScene(key){
+    const data = getSceneData(key || stateMan.getCurrentScene());
     const scene = sceneLoader(data);
     return scene;
 }
 
-export {getCamera, getScene}
+function _setActivePortals(){
+    if (activeScene){
+        activePortals = activeScene.children.filter((x)=>x.name.startsWith('abyss'));
+    }else{
+        console.log("no active scene, hence no portals");
+    }
+}
+
+function _setCamera(sceneId=null){
+    activeCam = _getCamera(sceneId);
+}
+
+function _setScene(sceneId=null){
+    activeScene = _getScene(sceneId);
+}
+
+function initScene(){
+    if (!activeCam)
+        _setCamera();
+    _setScene();
+    _setActivePortals();
+}
+
+
+function getCamera(){
+    return activeCam;
+}
+
+function getScene(){
+    return activeScene;
+}
+
+function getPortals(){
+    return activePortals;
+}
+
+export {initScene, getCamera, getScene, getPortals}

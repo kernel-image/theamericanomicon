@@ -1,66 +1,40 @@
 import './style.css'
 import * as THREE from 'three';
-import { WebGPURenderer } from 'three/webgpu';
-import { getScene, getCamera } from './sceneLoader';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { getCurrentScene } from './state';
+import { getScene, getCamera, initScene } from './sceneLoader';
+import { fadeIn, initFade } from './utils/fadeInOut';
+import { stateMan } from './state';
+import { raycastMan } from './raycaster';
+import { animate, frame } from "motion";
+import { threeEffect } from "motion/three";
+import {initCamControls, updateCamControls} from './utils/camControl';
+import { initRenderer, getRenderer } from './renderer';
 
-const scene = getScene(getCurrentScene());
-const camera = getCamera(getCurrentScene());
-const renderer = new WebGPURenderer({alpha: false});
-let camControls;
 
 async function init() {
-  
-  renderer.setPixelRatio( window.devicePixelRatio );
-  renderer.setSize( window.innerWidth, window.innerHeight );
-  document.body.appendChild( renderer.domElement );
-  await renderer.init();
+  console.log(`scene: ${stateMan.nextScene()}`);
+  initScene();
+  initFade();
+  await initRenderer();
   window.addEventListener( 'resize', onWindowResize );
-  camControls = new createCamControl( camera );
-  camControls.target.set(0, 0, .01);
-
-
+  initCamControls();
+  raycastMan();
+  animate.addEffect(threeEffect);
 }
-
-function createCamControl(camera){
-
-				const controls = new OrbitControls( camera, renderer.domElement );
-        controls.enableRotate = true;
-        controls.enableZoom = false;
-				controls.enablePan = false;
-        controls.enableDamping = true;
-        controls.mouseButtons = {
-          LEFT: THREE.MOUSE.ROTATE, 
-          MIDDLE: THREE.MOUSE.NONE,
-          RIGHT: THREE.MOUSE.NONE
-        };
-
-        return controls;
-}
-
 
 function onWindowResize() {
-
-  const windowHalfX = window.innerWidth / 2;
-  const windowHalfY = window.innerHeight / 2;
-
+  const camera = getCamera();
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-
-  renderer.setSize( window.innerWidth, window.innerHeight );
-
+  getRenderer().setSize( window.innerWidth, window.innerHeight );
 }
 
-
-function animate() {
-  camControls.update();
-  renderer.render( scene, camera );
-
+function update() {
+  updateCamControls();
+  getRenderer().render( getScene(), getCamera() );
 }
 
 await init();
-//renderer.render( scene, camera );
-renderer.setAnimationLoop( animate );
+frame.render(() => {update()}, true);
+fadeIn();
 
 
