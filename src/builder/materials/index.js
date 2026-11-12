@@ -1,5 +1,7 @@
 import { matUv } from './mat-uv'
 import { matWireframe } from './mat-wireframe';
+import { metal } from './mat-ceiling';
+import {dirt} from './mat-floor';
 
 function matLookup(key){
     switch(key){
@@ -7,10 +9,10 @@ function matLookup(key){
             return matUv;
         case "wireframe":
             return matWireframe;
-        case "floor":
-            return null;
-        case "ceiling":
-            return null;
+        case "dirt":
+            return dirt;
+        case "metal":
+            return metal;
         default:
             return matWireframe;
     }
