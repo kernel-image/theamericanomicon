@@ -1,7 +1,7 @@
 import { matUv } from './mat-uv'
 import { matWireframe } from './mat-wireframe';
-import { metal } from './mat-ceiling';
-import {dirt} from './mat-floor';
+import { metal } from './mat-metal';
+import { dirt } from './mat-dirt';
 
 function matLookup(key){
     switch(key){
