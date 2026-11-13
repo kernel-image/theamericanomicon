@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { boxUV } from '../utils/boxUV';
+import { applyCylindricalUVs } from '../utils/cylindarUV';
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js'
 
 const wallRes = 64;
@@ -68,7 +68,7 @@ function buildWallGeo(){
     const mergeDistance = 0.0001;
     combinedGeo = BufferGeometryUtils.mergeVertices(combinedGeo, mergeDistance);
     //generate uvs
-    boxUV(combinedGeo);
+    combinedGeo = applyCylindricalUVs(combinedGeo, Math.PI * 1.5);
     return combinedGeo;
 }
 
@@ -103,8 +103,8 @@ function buildBackWallGeo(){
 export function buildGeo(){
     const data = {};
     data['walls'] = buildWallGeo();
-    data['floor'] = buildFloorGeo().translate(0,roomScale/2, 0);
-    data['ceiling'] = buildFloorGeo().rotateZ(Math.PI).translate(0,roomScale/-2, 0);
+    data['ceiling'] = buildFloorGeo().translate(0,roomScale/2, 0);
+    data['floor'] = buildFloorGeo().rotateZ(Math.PI).translate(0,roomScale/-2, 0);
     data['gate'] = buildBackWallGeo();
     data['portal1'] = buildPortalGeo(0.25).translate(roomScale/-4, roomScale/-3.7, roomScale/-2);
     data['portal2'] = buildPortalGeo(-0.25).translate(roomScale/4, roomScale/-3.7, roomScale/-2);
