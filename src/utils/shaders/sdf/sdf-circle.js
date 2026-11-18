@@ -19,4 +19,4 @@ const drawCircle = /*@__PURE__*/ Fn(({radius=0.5, imageRes=vec2(1,1), placement=
     return out;
 }, {radius: "float", imageRes: "vec2", placement: "vec2", scale: "float", insideColor: "vec3", outsideColor: "vec3", bgColor: "vec3", outline: "boolean", expantion: "float", echosAmt: "float", echosFreq: "float", return: "vec3"});
 
-export { circle };
+export { circle, drawCircle };

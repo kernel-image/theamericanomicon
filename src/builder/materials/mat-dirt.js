@@ -1,13 +1,8 @@
-import * as THREE from 'three';
-import { color } from 'three/tsl';
-import { metalness, roughness } from 'three/tsl';
+import * as THREE from 'three/webgpu';
+import { defaultFloorShader } from '../../utils/shaders';
 
-const material = new THREE.MeshStandardMaterial({
-  color: 0x140a0c,
-  metalness: 0,
-  roughness:0.75,
+const material = new THREE.MeshBasicNodeMaterial({
+  colorNode: defaultFloorShader(),
 });
-
-
 
 export {material as dirt}

@@ -1,5 +1,5 @@
 import './style.css'
-import * as THREE from 'three';
+import * as THREE from 'three/webgpu';
 import { getScene, getCamera, initScene } from './sceneLoader';
 import { fadeIn, initFade } from './utils/fadeInOut';
 import { stateMan } from './state';

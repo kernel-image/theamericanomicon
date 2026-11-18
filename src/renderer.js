@@ -1,13 +1,14 @@
 import { WebGPURenderer } from 'three/webgpu';
 
 
-const renderer = new WebGPURenderer({alpha: false});
+let renderer;
 
 async function initRenderer() {
+    renderer = new WebGPURenderer({alpha: false});
+    document.body.appendChild(renderer.domElement);
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-    await renderer.init();
+    await renderer.init(); 
 }
 
 function getRenderer(){
