@@ -2,7 +2,7 @@ const roomData = {
     "1":{
         "audio":"path",
         "materials":{
-            "walls":"uv",
+            "walls":"simpleBoxes",
             "floor":"dirt",
             "ceiling":"metal",
             "gate":"metal",

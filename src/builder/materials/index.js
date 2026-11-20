@@ -2,6 +2,7 @@ import { matUv } from './mat-uv'
 import { matWireframe } from './mat-wireframe';
 import { metal } from './mat-metal';
 import { dirt } from './mat-dirt';
+import { simpleBoxes } from './mat-pattern-simpleBox';
 
 function matLookup(key){
     switch(key){
@@ -13,6 +14,8 @@ function matLookup(key){
             return dirt;
         case "metal":
             return metal;
+        case "simpleBoxes":
+            return simpleBoxes;
         default:
             return matWireframe;
     }

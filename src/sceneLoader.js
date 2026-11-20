@@ -80,10 +80,15 @@ function _setScene(sceneId=null){
     activeScene = _getScene(sceneId);
 }
 
+function _setSceneFog(color=0xcccccc, amt=0.002){
+    activeScene.fog = new THREE.FogExp2( color, amt );
+}
+
 function initScene(){
     if (!activeCam)
         _setCamera();
     _setScene();
+    //_setSceneFog();
     _setActivePortals();
 }
 
