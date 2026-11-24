@@ -2,17 +2,26 @@ import * as THREE from 'three';
 import { getCameraData, getSceneData } from './data/config'
 import { roomBuilder } from './builder/room'
 import { stateMan } from './state';
+import { particleSystemMan, loadPartileConfig } from './utils/particleData';
 
 let activeCam;
 let activeScene;
 let activePortals;
+let partiSystem;
 
 function sceneLoader(sceneData){
     if (!sceneData){
         //throw Error("Invalid scene data");
         console.log("invalid scene data, skipping overrrides");
     }
+    //init
     const scene = new THREE.Scene();
+    if (sceneData.particles){
+        // must precede material assignment in roomBuilder
+        const partiConfig = loadPartileConfig(sceneData.particles);
+        partiSystem = particleSystemMan(partiConfig);
+    }
+    //add base objects
     const room = roomBuilder();
     for (var i in room)
         scene.add(room[i]);
@@ -22,10 +31,10 @@ function sceneLoader(sceneData){
     if (sceneData.lights){
         //add configured lights
     }else{
-        scene.add(new THREE.AmbientLight());
-        //scene.add(new THREE.RectAreaLight());
-        scene.add(new THREE.PointLight());
+        // scene.add(new THREE.AmbientLight());
+        // scene.add(new THREE.PointLight());
     }
+
     return scene;
 }
 
@@ -80,10 +89,15 @@ function _setScene(sceneId=null){
     activeScene = _getScene(sceneId);
 }
 
+function _setSceneFog(color=0xcccccc, amt=0.002){
+    activeScene.fog = new THREE.FogExp2( color, amt );
+}
+
 function initScene(){
     if (!activeCam)
         _setCamera();
     _setScene();
+    //_setSceneFog();
     _setActivePortals();
 }
 
@@ -100,4 +114,8 @@ function getPortals(){
     return activePortals;
 }
 
-export {initScene, getCamera, getScene, getPortals}
+function getPartiSystem(){
+    return partiSystem;
+}
+
+export {initScene, getCamera, getScene, getPortals, getPartiSystem}
