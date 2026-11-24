@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { applyCylindricalUVs } from '../utils/cylindarUV';
+import { applyCylindricalUVs } from '../utils/uvUnwrap/cylindarUV';
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js'
 
 const wallRes = 64;

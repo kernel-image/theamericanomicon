@@ -1,32 +1,34 @@
 const roomData = {
     "1":{
-        "audio":"path",
+        "audio":"mp3/845950.mp3",
         "materials":{
-            "walls":"simpleBoxes",
-            "floor":"dirt",
-            "ceiling":"metal",
-            "gate":"metal",
-            "portal1":"metal",
-            "portal2":"metal",
-            "abyss1":"metal",
-            "abyss2":"metal"
+            "walls":"particle",
+            "floor":"wireframe",
+            "ceiling":"wireframe",
+            "gate":"wireframe",
+            "portal1":"wireframe",
+            "portal2":"wireframe",
+            "abyss1":"wireframe",
+            "abyss2":"wireframe"
         },
-        "camera":{
-            "fov":135,
-            "near":null,
-            "far":null,
-            "position": {
-                x:0,
-                y:0,
-                z:0
-            },
-        }
-        
+        "particles":[
+            {
+                shape: "box",
+                maxParticles: 6,
+                initialSpawnCount:6,
+                initialEnergy:1,
+                lifespan: -1,
+                directionFn: () => [-1, 0],
+                audioFilter: "mid",
+                posOffsetFn: () => [0.2, 0.5],
+                sizeFn: () => [0.1/2.5, 0.1],
+            }
+        ]
     },
     "2":{
-        "audio":"path",
+        "audio":"mp3/845942.mp3",
         "materials":{
-            "walls":"uv",
+            "walls":"simpleBoxes",
             "floor":"dirt",
             "ceiling":"metal",
             "gate":"uv",
@@ -37,7 +39,20 @@ const roomData = {
         },
     },
     "3":{
-        "audio":"path",
+        "audio":"mp3/845943.mp3",
+        "materials":{
+            "walls":"uv",
+            "floor":"dirt",
+            "ceiling":"metal",
+            "gate":"wireframe",
+            "portal1":"wireframe",
+            "portal2":"wireframe",
+            "abyss1":"uv",
+            "abyss2":"uv"
+        },
+    },
+    "4":{
+        "audio":"mp3/845944.mp3",
         "materials":{
             "walls":"wireframe",
             "floor":"dirt",

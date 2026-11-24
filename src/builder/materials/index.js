@@ -3,6 +3,7 @@ import { matWireframe } from './mat-wireframe';
 import { metal } from './mat-metal';
 import { dirt } from './mat-dirt';
 import { simpleBoxes } from './mat-pattern-simpleBox';
+import { getPartiMat } from './mat-parti-proto';
 
 function matLookup(key){
     switch(key){
@@ -16,6 +17,8 @@ function matLookup(key){
             return metal;
         case "simpleBoxes":
             return simpleBoxes;
+        case "particle":
+            return getPartiMat();
         default:
             return matWireframe;
     }

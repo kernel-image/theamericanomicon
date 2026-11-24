@@ -1,10 +1,13 @@
 import * as THREE from 'three';
 import { uvmap } from "../../utils/shaders";
 
-const matUv = new THREE.MeshStandardMaterial();
-matUv.name = 'mat-uv';
-matUv.colorNode = uvmap();
-matUv.emissiveNode = uvmap();
-//matUv.side = THREE.DoubleSide;
+const matUv = (() => { 
+    const mat = new THREE.MeshStandardMaterial();
+    mat.name = 'mat-uv';
+    mat.colorNode = uvmap();
+    mat.emissiveNode = uvmap();
+    //matUv.side = THREE.DoubleSide;
+    return mat;
+})();
 
 export { matUv }

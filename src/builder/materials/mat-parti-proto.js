@@ -1,8 +1,12 @@
 import { MeshBasicNodeMaterial } from "three/webgpu";
-import { particleShader } from "../../utils/shaders";
+import { addPartiShaders } from "../../utils/shaders/composites/particleShader";
 
-const partiFactory = (uniformArray, posFn, sizeFn, drawFn, count, life)=>{
+const getPartiMat = ()=>{
     const mat = new MeshBasicNodeMaterial();
-    mat.colorNode = particleShader(uniformArray, posFn, sizeFn, drawFn, count, life);
+    const partiShader = addPartiShaders();
+    mat.colorNode = partiShader;
+    mat.emissiveNode = partiShader;
     return mat;
 }
+
+export {getPartiMat}
