@@ -19,7 +19,7 @@ const roomData = {
                 initialEnergy:1,
                 lifespan: -1,
                 directionFn: () => [-1, 0],
-                audioFilter: "mid",
+                audioFilter: "all",
                 posOffsetFn: () => [0.2, 0.5],
                 sizeFn: () => [0.1/2.5, 0.1],
             }

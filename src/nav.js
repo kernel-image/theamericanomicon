@@ -2,21 +2,21 @@ import { stateMan } from "./state";
 import { initScene } from "./sceneLoader";
 import { fadeIn, fadeOut } from "./utils/fadeInOut";
 import { resetPosition, animateCam2Portal } from "./animator";
+import { cancelAudioTrackProgressCapture, fadeOutAudio, startSceneAudio } from "./audioMan";
 
 let selectedPortal = null;
 const portalIds = ['abyss1', 'abyss2'];
 
 function attemptNav() {
     if (selectedPortal) {
+        animateCam2Portal(selectedPortal);
         switch (selectedPortal) {
             case portalIds[0]:
                 stateMan.prevScene();
-                animateCam2Portal(selectedPortal);
                 swapScenes();
                 break;
             case portalIds[1]:
                 stateMan.nextScene();
-                animateCam2Portal(selectedPortal);
                 swapScenes();
                 break;
         }
@@ -24,12 +24,19 @@ function attemptNav() {
 }
 
 function swapScenes() {
+    cancelAudioTrackProgressCapture();
     fadeOut();
+    fadeOutAudio();
     setTimeout(() => { 
         initScene();
-        fadeIn();
         resetPosition();
+        startScene();
     }, 1200);
+}
+
+function startScene() {
+    fadeIn();
+    startSceneAudio();
 }
 
 function setSelectedPortal(value){
@@ -45,4 +52,4 @@ function getSelectedPortal(){
     return selectedPortal
 }
 
-export { getSelectedPortal, setSelectedPortal, attemptNav }
+export { getSelectedPortal, setSelectedPortal, attemptNav, startScene }

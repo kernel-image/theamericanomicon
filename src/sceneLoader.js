@@ -118,4 +118,9 @@ function getPartiSystem(){
     return partiSystem;
 }
 
-export {initScene, getCamera, getScene, getPortals, getPartiSystem}
+function getAudioPath(key = null){
+    
+    return getSceneData(key || stateMan.getCurrentScene())?.audio;
+}
+
+export {initScene, getCamera, getScene, getPortals, getPartiSystem, getAudioPath}

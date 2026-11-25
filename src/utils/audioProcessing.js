@@ -53,19 +53,22 @@ const analysisFilter = (startBin, endBin, threshold = 200, cooldown = 0.2, metho
     }
 };
 
-//presets assuming 12 band analyzer
+//presets assuming 16 band analyzer
 const getAudioFilter = (key) => {
     switch (key.toLowerCase()){
         case 'low':
             return analysisFilter(0,3);
-        case 'mid':
+        case 'mid-low':
             return analysisFilter(4,7);
-        case 'high':
+        case 'mid-high':
             return analysisFilter(8,11);
+        case 'high':
+            return analysisFilter(12,15);
         case 'none':
             return null;
+        case 'all':
         default:
-            return analysisFilter(0,11);
+            return analysisFilter(0,15);
     }
 }
 

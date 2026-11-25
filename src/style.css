@@ -48,3 +48,44 @@ canvas {
   pointer-events: auto !important;
 }
 
+button {
+  background-color: var(--bg);
+  color: var(--text-h);
+  border-radius: 3.5px;
+  pointer-events: all;
+}
+
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enter {
+    z-index: 101;
+    outline: var(--shadow);
+    outline-width: 1px;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.muteButton {
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  z-index: '99';
+  visibility: hidden;
+  outline:none;
+  color: var(--text);
+}
+
+.mute, .unmute {
+    color: var(--bg);
+    width: 48px;
+    height: 48px;
+    z-index: 99;
+    visibility: hidden;
+}
+
+
+

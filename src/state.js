@@ -1,6 +1,7 @@
 
-const _stateMan = () => {
+const stateMan = (() => {
     let currentScene;
+    // define sequence here
     const sceneIds = ["1","2","3"];
     const getNextSceneId = () => {
         if (sceneIds?.length > 0){
@@ -50,8 +51,8 @@ const _stateMan = () => {
         nextScene,
         prevScene,
     }
-}
+})();
 
-const stateMan = _stateMan();
+// const stateMan = _stateMan();
 
 export { stateMan }

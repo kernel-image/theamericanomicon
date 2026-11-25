@@ -1,6 +1,7 @@
 const overlay = document.createElement('div');
 
 function initFade() {
+    overlay.className = 'overlay';
     overlay.style.position = 'absolute';
     overlay.style.top = 0;
     overlay.style.left = 0;
@@ -10,6 +11,7 @@ function initFade() {
     overlay.style.opacity = 1;
     overlay.style.transition = 'opacity 1s ease-in-out';
     overlay.style.pointerEvents = 'auto';
+    overlay.style.zIndex = 100;
     document.body.appendChild(overlay);
 }
 
