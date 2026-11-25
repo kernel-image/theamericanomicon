@@ -1,5 +1,5 @@
 import muteIconRaw from '@/assets/icons/muteIcon.svg?raw';
-import unmuteIconRaw from '@/assets/icons/muteIcon.svg?raw';
+import unmuteIconRaw from '@/assets/icons/unmuteIcon.svg?raw';
 import { toggleMute } from '../audioMan';
 
 let muteIcon, unmuteIcon;
@@ -27,9 +27,13 @@ const importSVG = (icon) => {
     return svgElement;
 }
 
+const showMuteButton = () => {
+    muteButton.style.visibility = 'visible';
+    setMuteButtonState(false);
+}
 
-const handleClick = () => {
-    if (toggleMute()){
+const setMuteButtonState = (muted) => {
+    if (muted){
         unmuteIcon.style.visibility = 'visible';
         muteIcon.style.visibility = 'hidden';
     } else {
@@ -38,4 +42,9 @@ const handleClick = () => {
     }
 }
 
-export {initMuteButton}
+
+const handleClick = () => {
+    setMuteButtonState(toggleMute());
+}
+
+export {initMuteButton, showMuteButton}

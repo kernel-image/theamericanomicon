@@ -7,9 +7,9 @@ function initFade() {
     overlay.style.left = 0;
     overlay.style.width = '100vw';
     overlay.style.height = '100vh';
-    overlay.style.backgroundColor = 'black';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 1.0)';
     overlay.style.opacity = 1;
-    overlay.style.transition = 'opacity 1s ease-in-out';
+    overlay.style.transition = 'backgroundColor 1s ease-in-out';
     overlay.style.pointerEvents = 'auto';
     overlay.style.zIndex = 100;
     document.body.appendChild(overlay);
@@ -17,12 +17,12 @@ function initFade() {
 
 function fadeOut () {
     overlay.style.pointerEvents = 'auto';
-    overlay.style.opacity = 1;
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 1.0)'; 
 }
 
 function fadeIn () {
     overlay.style.pointerEvents = 'none';
-    overlay.style.opacity = 0;
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)'; 
 }
 
 export { initFade, fadeIn, fadeOut }

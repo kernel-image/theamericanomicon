@@ -38,6 +38,7 @@ const initAudio = () => {
     analyzer = audioCtx.createAnalyser();
     analyzer.fftSize = 32; // frequencyBinCount: 16
     volume = audioCtx.createGain();
+    console.log(volume);
     wireAudioNodes(audioCtx, source, [analyzer, volume]);
     freqData = new Uint8Array(analyzer.frequencyBinCount);
     console.log("audio initialization complete");
@@ -62,7 +63,7 @@ const playAudioSrc = () => {
     const resumePoint = trackProgress[trackId] || 0;
     audioEl.currentTime = resumePoint < audioEl.duration ? resumePoint : 0;
     clearInterval(fadeId);
-    if (!isMuted) volume.value = 1;
+    if (!isMuted) volume.gain.value = 1;
     audioEl.play();
     progressCaptureId = setInterval(() => {
         setResumePoint(trackId);
@@ -91,9 +92,9 @@ const setResumePoint = (trackId, value=null) => {
 const toggleMute = () => {
     isMuted = !isMuted;
     if (isMuted){
-        volume.value = 0;
+        volume.gain.value = 0;
     } else {
-        volume.value = 1;
+        volume.gain.value = 1;
     }
     return isMuted;
 }
@@ -102,11 +103,11 @@ const fadeOutAudio = (duration) => {
     const stepDuration = 10;
     const steps = (duration > stepDuration ? 
         duration : stepDuration) / stepDuration;
-    const rate = volume.value / steps;
+    const rate = volume.gain.value / steps;
     fadeId = setInterval(()=> {
-        volume.value -= rate;
-        if (volume.value < 0.01){
-            volume.value = 0;
+        volume.gain.value -= rate;
+        if (volume.gain.value < 0.01){
+            volume.gain.value = 0;
             clearInterval(fadeId);
         }
     }, stepDuration);

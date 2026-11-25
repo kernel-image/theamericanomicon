@@ -71,20 +71,26 @@ button {
 
 .muteButton {
   position:absolute;
+  display:grid;
+  place-items: center;
   bottom:0px;
   left:0px;
-  z-index: '99';
+  z-index: 99;
   visibility: hidden;
   outline:none;
-  color: var(--text);
+  border-style: hidden;
+  background-color: rgba(0, 0, 0, 0.0);
 }
 
 .mute, .unmute {
+    grid-area: 1/1;
     color: var(--bg);
     width: 48px;
     height: 48px;
     z-index: 99;
     visibility: hidden;
+    color: var(--accent);
+    pointer-events: none;
 }
 
 

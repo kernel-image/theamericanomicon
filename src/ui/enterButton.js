@@ -1,4 +1,5 @@
 import { startScene } from "../nav";
+import { showMuteButton } from "./muteButton";
 
 const enterButton = document.createElement('button');
 
@@ -15,6 +16,7 @@ const handleClick = () => {
     console.log("manifest doom");
     enterButton.style.visibility = 'hidden';
     startScene();
+    showMuteButton();
 }
 
 export {initEnterButton}
