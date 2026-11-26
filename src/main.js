@@ -35,8 +35,9 @@ function onWindowResize() {
 
 function update() {
   updateCamControls();
-  if (isPlaying)
+  if (isPlaying()){
     updateAudioSignal(analyzer, freqData, getElapsedTime(), getPartiSystem());
+  }
   getRenderer().render( getScene(), getCamera() );
 }
 
