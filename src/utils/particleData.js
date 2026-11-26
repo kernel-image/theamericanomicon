@@ -38,25 +38,24 @@ const particleSystemMan = (bandConfiguarationObjects = [{ maxParticles: 100, ini
     bandConfiguarationObjects.forEach((config) => {
 
         const spawnData = createSpawnData(config.maxParticles, config.initialSpawnCount, config.initialEnergy);
-
+        console.log(`spawnData length: ${spawnData.length}`); // 6
+        console.log(`initial spawn count: ${config.initialSpawnCount}`); // 0
         bands.push({
             shape: config.shape,
-            direction: config.direction,
             //maxParticles: spawnData.length,
             particleData: spawnData,
             spawnDataUniform: uniformArray(spawnData, 'vec2'),
             lifespan: config.lifespan,
-            nextSlot: config.initialSpawnCount,
+            nextSlot: Number(config.initialSpawnCount) % (spawnData.length - 1),
             lastTriggerTime: -999.0,
             audioFilter: config.audioFilter,
-            // posFn: config.posFn,
             posOffsetFn: config.posOffsetFn,
             sizeFn: config.sizeFn,
             directionFn: config.directionFn,
         });
 
     });
-
+    console.log(bands); // bands[1].nextSlot = NaN !?
     return bands;
 
 }
