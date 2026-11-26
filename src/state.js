@@ -2,7 +2,7 @@
 const stateMan = (() => {
     let currentScene;
     // define sequence here
-    const sceneIds = ["1","2","3"];
+    const sceneIds = ["1","2","3","4","5","6","7","8"];
     const getNextSceneId = () => {
         if (sceneIds?.length > 0){
             const idx = sceneIds.indexOf(currentScene);

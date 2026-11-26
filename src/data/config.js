@@ -1,4 +1,4 @@
-import {float, int, sin, cos, TWO_PI} from 'three/tsl';
+import {float, int, sin, cos, atan, TWO_PI, reciprocal, inverse, hash} from 'three/tsl';
 
 const roomData = {
     "1":{
@@ -26,7 +26,7 @@ const roomData = {
                 sizeFn: () => [0.1/2.5, 0.1],
             },
             {
-                shape: "box",
+                shape: "circle",
                 maxParticles: 16,
                 initialSpawnCount:0,
                 initialEnergy:1,
@@ -46,17 +46,32 @@ const roomData = {
                 audioFilter: "mid-low",
                 posOffsetFn: () => [0.0, 0.5],
                 sizeFn: ({idx, lifePct}) => [float(lifePct).mul(float(0.1)), int(idx).mul(float(0.1))],
-            }/*
+            }
+        ]
+    },
+    "2":{
+        "audio":"mp3/845942.mp3",
+        "materials":{
+            "walls":"particle",
+            "floor":"wireframe",
+            "ceiling":"wireframe",
+            "gate":"wireframe",
+            "portal1":"wireframe",
+            "portal2":"wireframe",
+            "abyss1":"wireframe",
+            "abyss2":"wireframe"
+        },
+        "particles":[
             {
                 shape: "circle",
                 maxParticles: 32,
                 initialSpawnCount:0,
                 initialEnergy:1,
                 lifespan: 8,
-                directionFn: ({idx, lifePct}) => [Math.atan(idx) * 2 / Math.PI * lifePct, Math.atan(idx) * -2 / Math.PI],
-                audioFilter: "mid-high",
+                directionFn: ({idx, lifePct}) => [atan(int(idx)).mul(TWO_PI).mul(float(lifePct)), atan(int(idx)).mul(TWO_PI).mul(-1)],
+                audioFilter: "high",
                 posOffsetFn: () => [0.0, 0.5],
-                sizeFn: ({idx, lifePct}) => [1/lifePct * Math.sin(idx)/(Math.PI*2), 1/lifePct],
+                sizeFn: ({idx, lifePct}) => [reciprocal(float(lifePct)).mul(sin(int(idx))).div(TWO_PI), reciprocal(float(lifePct))],
             },
             {
                 shape: "circle",
@@ -64,26 +79,12 @@ const roomData = {
                 initialSpawnCount:0,
                 initialEnergy:1,
                 lifespan: 2,
-                directionFn: ({idx, lifePct}) => [Math.random(idx) * lifePct, Math.random(idx) * lifePct],
-                audioFilter: "high",
+                directionFn: ({idx, lifePct}) => [hash(int(idx)).mul(float(lifePct)), hash(int(idx)).mul(float(lifePct))],
+                audioFilter: "low",
                 posOffsetFn: () => [0.0, 0.5],
-                sizeFn: ({idx, lifePct}) => [(1-lifePct)/10, (1 - lifePct)/10],
-            },
-            */
+                sizeFn: ({idx, lifePct}) => [float(lifePct).oneMinus().div(int(10)), float(lifePct).oneMinus().div(int(10))],
+            }
         ]
-    },
-    "2":{
-        "audio":"mp3/845942.mp3",
-        "materials":{
-            "walls":"simpleBoxes",
-            "floor":"dirt",
-            "ceiling":"metal",
-            "gate":"uv",
-            "portal1":"uv",
-            "portal2":"uv",
-            "abyss1":"wireframe",
-            "abyss2":"wireframe"
-        },
     },
     "3":{
         "audio":"mp3/845943.mp3",
@@ -104,6 +105,58 @@ const roomData = {
             "walls":"wireframe",
             "floor":"dirt",
             "ceiling":"metal",
+            "gate":"wireframe",
+            "portal1":"wireframe",
+            "portal2":"wireframe",
+            "abyss1":"uv",
+            "abyss2":"uv"
+        },
+    },
+    "5":{
+        "audio":"",
+        "materials":{
+            "walls":"simpleBoxes",
+            "floor":"dirt",
+            "ceiling":"metal",
+            "gate":"wireframe",
+            "portal1":"wireframe",
+            "portal2":"wireframe",
+            "abyss1":"uv",
+            "abyss2":"uv"
+        },
+    },
+    "6":{
+        "audio":"mp3/845946.mp3",
+        "materials":{
+            "walls":"wireframe",
+            "floor":"dirt",
+            "ceiling":"metal",
+            "gate":"wireframe",
+            "portal1":"wireframe",
+            "portal2":"wireframe",
+            "abyss1":"uv",
+            "abyss2":"uv"
+        },
+    },
+    "7":{
+        "audio":"",
+        "materials":{
+            "walls":"wireframe",
+            "floor":"wireframe",
+            "ceiling":"wireframe",
+            "gate":"wireframe",
+            "portal1":"wireframe",
+            "portal2":"wireframe",
+            "abyss1":"uv",
+            "abyss2":"uv"
+        },
+    },
+    "8":{
+        "audio":"",
+        "materials":{
+            "walls":"uv",
+            "floor":"wireframe",
+            "ceiling":"wireframe",
             "gate":"wireframe",
             "portal1":"wireframe",
             "portal2":"wireframe",
