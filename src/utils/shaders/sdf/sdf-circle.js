@@ -1,8 +1,8 @@
 import * as THREE from 'three';
-import { Fn, uv, smoothstep } from 'three/tsl';
+import { Fn, uv, smoothstep, vec3, vec2, length } from 'three/tsl';
 
 const circle = /*@__PURE__*/ Fn(([position, radius]) => {
-  return length(position).sub(radius)
+  return length(position.sub(vec2(0.5))).sub(radius);
 }, { position: "vec2", radius: "float", return: "float"});
 
 const drawCircle = /*@__PURE__*/ Fn(([ p, r = 0.2,  expantion = 0.001]) => {
