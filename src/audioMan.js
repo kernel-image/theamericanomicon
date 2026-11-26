@@ -16,7 +16,6 @@ const initAudio = () => {
     });
 
     const initStream = (ctx, element, url) => {
-        console.log(`initializing audio with ${url}`);
         element.crossOrigin = 'anonymous';
         element.loop = false;
         element.src = url;
@@ -38,10 +37,8 @@ const initAudio = () => {
     analyzer = audioCtx.createAnalyser();
     analyzer.fftSize = 32; // frequencyBinCount: 16
     volume = audioCtx.createGain();
-    console.log(volume);
     wireAudioNodes(audioCtx, source, [analyzer, volume]);
     freqData = new Uint8Array(analyzer.frequencyBinCount);
-    console.log("audio initialization complete");
 }
 
 
