@@ -35,7 +35,7 @@ const initAudio = () => {
     console.log(path);
     const source = initStream(audioCtx, audioEl, path);
     analyzer = audioCtx.createAnalyser();
-    analyzer.fftSize = 32; // frequencyBinCount: 16
+    analyzer.fftSize = 32; // => frequencyBinCount: 16
     volume = audioCtx.createGain();
     wireAudioNodes(audioCtx, source, [analyzer, volume]);
     freqData = new Uint8Array(analyzer.frequencyBinCount);
@@ -43,7 +43,7 @@ const initAudio = () => {
 
 
 const updateAudioSrc = (url) => {
-    if (audioEl.src != url){
+    if (audioEl.src != url && url.trim()){
         console.log(`updating audio source to ${url}`);
         audioEl.src = url;
     }
@@ -69,8 +69,15 @@ const playAudioSrc = () => {
 
 const startSceneAudio = () => {
     const url = getAudioPath();
-    updateAudioSrc(url);
-    playAudioSrc();
+    if (url.trim()){
+        updateAudioSrc(url);
+        playAudioSrc();
+    } else {
+        console.log("no audio assigned to this scene.");
+        audioEl.pause();
+        clearInterval(fadeId);
+    }
+    
 }
 
 
